@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Query>
+	<movie>
+		<getAllMovie>
+			SELECT M.*
+				   , G.GRADE_TITLE
+				   , AC.ACTOR_COUNT
+			FROM MOVIE M
+				 , GRADE G
+				 , (
+				     SELECT MOVIE_ID
+				     		, COUNT(ACTOR_LIST_ID) ACTOR_COUNT 
+				     FROM ACTOR_LIST 
+				     GROUP BY MOVIE_ID
+				    ) AC 
+			WHERE M.GRADE_ID = G.GRADE_ID 
+			AND AC.MOVIE_ID(+) = M.MOVIE_ID
+		</getAllMovie>
+		<getOneMovieInfoByMovieId>
+			/* Query 범위 주석 */
+			SELECT 	M.*
+				   	, G.GRADE_TITLE
+			FROM 	MOVIE M
+				 	, GRADE G
+			WHERE 	M.GRADE_ID = G.GRADE_ID 
+			AND	  	M.MOVIE_ID = ?
+		</getOneMovieInfoByMovieId>
+		<insertNewMovie>
+			INSERT INTO MOVIE (
+								MOVIE_ID
+								, TITLE
+								, RATE
+								, RUNNING_TIME
+								, OPEN_DATE
+								, GRADE_ID
+							  )
+			VALUES            (
+								MOVIE_ID_SEQ.NEXTVAL
+								, ?
+								, ?
+								, ?
+								, TO_DATE(?, 'YYYY-MM-DD')
+								, ?
+							  )
+		</insertNewMovie>
+		<getLatestMovieId>
+			SELECT MOVIE_ID_SEQ.CURRVAL
+			FROM   DUAL
+		</getLatestMovieId>
+	</movie>
+	
+	<director>
+		<getDirectorInfo>
+			SELECT  DIRECTOR_NAME
+			FROM    DIRECTED_MOVIE DM
+			        , DIRECTOR D
+			WHERE   DM.DIRECTOR_ID = D.DIRECTOR_ID
+			AND     DM.MOVIE_ID = ?
+		</getDirectorInfo>
+		<getAllDirectorInfo>
+			SELECT	*
+			FROM	DIRECTOR
+		</getAllDirectorInfo>
+		<insertDirectorList>
+			INSERT INTO DIRECTED_MOVIE (
+									DIRECTOR_LIST_ID
+									, MOVIE_ID
+									, DIRECTOR_ID
+								   )
+			VALUES				   (
+									DIRECTED_MOVIE_ID_SEQ.NEXTVAL
+									, ?
+									, ?
+								   )
+		</insertDirectorList>		
+	</director>
+	
+	<actor>
+		<getActorInfo>
+			SELECT	ACTOR_NAME
+			FROM	ACTOR A
+					, ACTOR_LIST AL
+			WHERE	A.ACTOR_ID = AL.ACTOR_ID
+			AND		AL.MOVIE_ID = ?	
+		</getActorInfo>
+		
+		<insertNewActor>
+			INSERT INTO ACTOR 	(
+									ACTOR_ID
+									, ACTOR_NAME
+								)
+			VALUES				(
+									ACTOR_ID_SEQ.NEXTVAL
+									, ?
+								)
+			
+		</insertNewActor>
+		
+		<getAllActorInfo>
+			SELECT  *
+			FROM	ACTOR 
+		</getAllActorInfo>
+		<insertActorList>
+			INSERT INTO ACTOR_LIST (
+									ACTOR_LIST_ID
+									, MOVIE_ID
+									, ACTOR_ID
+								   )
+			VALUES				   (
+									ACTOR_LIST_ID_SEQ.NEXTVAL
+									, ?
+									, ?
+								   )
+		</insertActorList>
+	</actor>
+	
+	<genre>
+		<getGenreInfo>
+			SELECT	GENRE_TITLE
+					, G.GENRE_ID
+			FROM 	GENRE G
+					, GENRE_LIST GL
+			WHERE	G.GENRE_ID = GL.GENRE_ID
+			AND		GL.MOVIE_ID = ?		
+		</getGenreInfo>
+		<getAllGenreInfo>
+			SELECT	*
+			FROM	GENRE
+		</getAllGenreInfo>
+		<insertGenreList>
+			INSERT INTO GENRE_LIST (
+									GENRE_LIST_ID
+									, MOVIE_ID
+									, GENRE_ID
+								   )
+			VALUES				   (
+									GENRE_LIST_ID_SEQ.NEXTVAL
+									, ?
+									, ?
+								   )
+		</insertGenreList>
+	</genre>
+	
+	<grade>
+		<getGradeInfo>
+			SELECT	GRADE_TITLE
+			FROM	GRADE G
+					, MOVIE M
+			WHERE	M.MOVIE_ID = ?
+			AND		M.GRADE_ID = G.GRADE_ID
+		</getGradeInfo>
+		<getAllGradeInfo>
+			SELECT	*
+			FROM	GRADE
+		</getAllGradeInfo>
+	</grade>
+</Query>
+
+
+
+

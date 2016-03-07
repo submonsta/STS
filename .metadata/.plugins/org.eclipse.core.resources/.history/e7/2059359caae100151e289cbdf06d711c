@@ -1,0 +1,14 @@
+package com.ktds.hskim.member.dao;
+
+import com.ktds.hskim.member.vo.MemberVO;
+
+public class MemberDAO {
+	
+	public MemberVO getMemberByIdAndPassword( MemberVO member ) {
+		
+		
+		
+		
+	}
+	
+}

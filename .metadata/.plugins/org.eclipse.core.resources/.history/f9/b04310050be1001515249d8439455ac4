@@ -1,0 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+    
+    	<div id="login">
+    	
+    		<form id="loginForm">
+    			<input type="text" id="userId" name="userId" placeholder="ID">
+    			<input type="password" id="userPw" name="userPw" placeholder="Password">
+    			<img src="/resource/img/login.png" id="btnlogin" />
+    		</form>
+    	
+    	</div>

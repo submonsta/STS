@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+
+div#login input {
+	margin-bottom: 10px;
+}
+
+#btnlogin {
+	height: 25px;
+	
+}
+

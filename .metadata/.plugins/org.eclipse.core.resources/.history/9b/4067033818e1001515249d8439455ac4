@@ -1,0 +1,36 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="./resource/css/index.css" />
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div id="frame"> FRAME
+		<div id="row1">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+		
+		<div id="row2">
+			<div></div>
+			<div></div>
+		</div>
+
+		<div id="row3">
+			<div></div>
+			<div></div>
+		</div>
+		
+		<div id="row4">
+			<div></div>
+		</div>
+	</div>
+
+</body>
+</html>

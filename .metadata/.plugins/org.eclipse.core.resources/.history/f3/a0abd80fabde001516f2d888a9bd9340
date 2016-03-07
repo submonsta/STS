@@ -1,0 +1,5 @@
+package com.ktds.hskim.dao;
+
+public class GenreDAO {
+
+}

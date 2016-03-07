@@ -1,0 +1,158 @@
+package com.ktds.hskim.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ktds.hskim.util.xml.XML;
+import com.ktds.hskim.vo.DirectorVO;
+import com.ktds.hskim.vo.MovieVO;
+
+public class DirectorDAO {
+	
+	public List<DirectorVO> getDirectorInfo( int movieId ) {
+		
+		loadOracleDriver();
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		List<DirectorVO> directors = new ArrayList<DirectorVO>();
+		
+		
+		try {
+			conn = DriverManager.getConnection(Const.DB_URL, Const.DB_USER, Const.DB_PASSWORD);
+			
+			String query = XML.getNodeString("//Query/director/getDirectorInfo/text()");
+			stmt = conn.prepareStatement(query);
+			
+			stmt.setInt(1, movieId);
+			
+			rs = stmt.executeQuery();
+			DirectorVO director = null;
+			
+			while ( rs.next() ) {
+				director = new DirectorVO();
+				director.setDirectorName(rs.getString("DIRECTOR_NAME"));
+			}
+			
+			directors.add(director);
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+		finally {
+			closeDB(conn, stmt, rs);
+		}
+		
+		return directors;
+		
+	}
+	
+	public List<DirectorVO> getAllDirectorInfo() {
+		
+		loadOracleDriver();
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		List<DirectorVO> directors = new ArrayList<DirectorVO>();
+		
+		
+		try {
+			conn = DriverManager.getConnection(Const.DB_URL, Const.DB_USER, Const.DB_PASSWORD);
+			
+			String query = XML.getNodeString("//Query/director/getAllDirectorInfo/text()");
+			stmt = conn.prepareStatement(query);
+		
+			rs = stmt.executeQuery();
+			DirectorVO director = null;
+			
+			while ( rs.next() ) {
+				director = new DirectorVO();
+				director.setDirectorId(rs.getInt("DIRECTOR_ID"));
+				director.setDirectorName(rs.getString("DIRECTOR_NAME"));
+				directors.add(director);
+			}
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+		finally {
+			closeDB(conn, stmt, rs);
+		}
+		
+		return directors;
+		
+	}
+	
+	public int insertNewDirectorOfNewMovie( DirectorVO director ) {
+		
+		loadOracleDriver();
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;		
+		int insertCount = 0;
+		
+		try {
+			conn = DriverManager.getConnection(Const.DB_URL, Const.DB_USER, Const.DB_PASSWORD);
+			
+			String query = XML.getNodeString("//Query/director/insertDirectorList/text()");
+			stmt = conn.prepareStatement(query);
+			
+			stmt.setInt(1, director.getMovieId());
+			stmt.setInt(2, director.getDirectorId());
+			
+			insertCount = stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+		finally {
+			closeDB(conn, stmt, null);
+		}
+		
+		return insertCount;
+		
+	}
+	
+	/**
+	 * Oracle Driver
+	 */
+	private void loadOracleDriver() {
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+	}
+	
+	/**
+	 * Close DB
+	 */
+	private void closeDB(Connection conn, PreparedStatement stmt, ResultSet rs) {
+		if ( rs != null ) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+			}
+		}
+		if ( stmt != null ) {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+			}
+		}
+		if ( conn != null ) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+			}
+		}
+	}
+	
+}

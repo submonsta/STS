@@ -1,0 +1,80 @@
+package com.ktds.hskim.web;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class AddNewMovieActionServlet
+ */
+public class AddNewMovieActionServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public AddNewMovieActionServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.sendError(HttpServletResponse.SC_FORBIDDEN, "잘못된 요청입니다");
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String movieTitle = request.getParameter("movieTitle");
+		String rate = request.getParameter("rate");
+		String runningTime = request.getParameter("runningTime");
+		String openDate = request.getParameter("openDate");
+		String grade = request.getParameter("grade");
+		
+		List<String> directors = Arrays.asList(request.getParameterValues("directors"));
+		List<String> actors = Arrays.asList(request.getParameter("actors"));
+		List<String> genres = Arrays.asList(request.getParameter("genres"));
+		
+		if ( movieTitle == null || movieTitle.length() ==0 ) {
+			response.sendRedirect("/Movie/addNewMovie?errorCode=1");
+		}
+		if ( rate == null || rate.length() ==0 ) {
+			response.sendRedirect("/Movie/addNewMovie?errorCode=2");
+		}
+		if ( runningTime == null || runningTime.length() ==0 ) {
+			response.sendRedirect("/Movie/addNewMovie?errorCode=3");
+		}
+		if ( openDate == null || openDate.length() ==0 ) {
+			response.sendRedirect("/Movie/addNewMovie?errorCode=4");
+		}
+		if ( grade == null || grade.length() ==0 ) {
+			response.sendRedirect("/Movie/addNewMovie?errorCode=5");
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+
+}

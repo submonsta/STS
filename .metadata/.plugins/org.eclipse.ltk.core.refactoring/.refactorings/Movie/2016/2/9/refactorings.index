@@ -1,0 +1,5 @@
+1456359551833	Rename type 'MovieActor'
+1456363201249	Rename type 'MovieActorVO'
+1456363232082	Delete element
+1456363248975	Rename type 'MovieVO'
+1456382057731	Extract method 'closeDB'

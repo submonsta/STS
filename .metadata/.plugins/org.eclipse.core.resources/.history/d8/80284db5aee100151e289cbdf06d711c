@@ -1,0 +1,29 @@
+package com.ktds.hskim.member.biz;
+
+import com.ktds.hskim.member.dao.MemberDAO;
+import com.ktds.hskim.member.vo.MemberVO;
+
+public class MemberBiz {
+	
+	private MemberDAO memberDAO;
+	
+	public MemberBiz() {
+		memberDAO = new MemberDAO();
+	}
+	
+	public boolean login (MemberVO member) {
+		
+		// 1 회원 정보 가져오기
+		MemberVO loginMember = memberDAO.getMemberByIdAndPassword(member);
+		
+		
+		// 2 일치하는 회원 정보 세션에 넣기
+		
+		
+		
+		// 3 결과 보고
+		
+		
+		return false;
+	}
+}

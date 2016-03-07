@@ -1,0 +1,76 @@
+package com.ktds.hskim.web;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.ktds.hskim.dao.ActorDAO;
+import com.ktds.hskim.dao.DirectorDAO;
+import com.ktds.hskim.dao.GenreDAO;
+import com.ktds.hskim.dao.GradeDAO;
+import com.ktds.hskim.vo.ActorVO;
+import com.ktds.hskim.vo.DirectorVO;
+import com.ktds.hskim.vo.GenreVO;
+import com.ktds.hskim.vo.GradeVO;
+
+/**
+ * Servlet implementation class AddNewMovieServlet
+ */
+public class AddNewMovieServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+	private DirectorDAO directorDAO;
+	private ActorDAO actorDAO;
+	private GradeDAO gradeDAO;
+	private GenreDAO genreDAO;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public AddNewMovieServlet() {
+        super();
+        directorDAO = new DirectorDAO();
+        actorDAO = new ActorDAO();
+        gradeDAO = new GradeDAO();
+        genreDAO = new GenreDAO();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// 1 장르 리스트
+		List<GenreVO> genreList = genreDAO.getGenreInfo();
+		
+		// 2 등급 리스트
+		List<GradeVO> gradeList = gradeDAO.getGradeInfo();
+		
+		// 3 감독 리스트
+		List<DirectorVO> directorList = directorDAO.getDirectorInfo();
+		
+		// 4 배우 리스트
+		List<ActorVO> actorList = actorDAO.getActors();
+		
+		request.setAttribute("genreList", genreList);
+		request.setAttribute("gradeList", gradeList);
+		request.setAttribute("directorList", directorList);
+		request.setAttribute("actorList", actorList);
+		
+		
+		
+	}
+
+}

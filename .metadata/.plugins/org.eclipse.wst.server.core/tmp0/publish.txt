@@ -1,0 +1,5 @@
+#Tomcat publish data
+#Fri Mar 04 11:32:48 KST 2016
+org.eclipse.jst.jee.server\:DivHomework=C\:\\Users\\206-001\\Desktop\\sts-bundle\\pivotal-tc-server-developer-3.1.2.RELEASE\\base-instance\\wtpwebapps\\DivHomework
+org.eclipse.jst.jee.server\:Article=C\:\\Users\\206-001\\Desktop\\sts-bundle\\pivotal-tc-server-developer-3.1.2.RELEASE\\base-instance\\wtpwebapps\\Article
+org.eclipse.jst.jee.server\:DivHomework_2=C\:\\Users\\206-001\\Desktop\\sts-bundle\\pivotal-tc-server-developer-3.1.2.RELEASE\\base-instance\\wtpwebapps\\DivHomework_2

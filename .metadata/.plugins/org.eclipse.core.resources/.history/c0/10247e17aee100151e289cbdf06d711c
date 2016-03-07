@@ -1,0 +1,22 @@
+package com.ktds.hskim.member.biz;
+
+import com.ktds.hskim.member.dao.MemberDAO;
+import com.ktds.hskim.member.vo.MemberVO;
+
+public class MemberBiz {
+	
+	private MemberDAO memberDAO;
+	
+	public MemberBiz() {
+		memberDAO = new MemberDAO();
+	}
+	
+	public boolean login (MemberVO member) {
+		
+		
+		
+		
+		
+		return false;
+	}
+}

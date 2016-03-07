@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+#btnlogin {
+	height: 18px;
+	
+}
+
+div#login img {
+	
+	width: 15px;
+	height: 15px;
+	
+}
